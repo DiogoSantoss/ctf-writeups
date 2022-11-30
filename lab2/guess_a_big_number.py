@@ -5,7 +5,7 @@ URL = "http://mustard.stt.rnl.tecnico.ulisboa.pt:22052"
 session = requests.session()
 session.get(URL)
 
-min = 1
+min = 0
 max = 100000
 
 while True:
