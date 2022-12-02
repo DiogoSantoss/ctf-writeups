@@ -1,11 +1,11 @@
 # Challenge `Python requests Again` Writeup
 
 - Vulnerability: 
-  - brute-force attack and cookie manipulation
+  - brute-force attack and cookie poisoning
 - Where:
-  - `/more` endpoint and cookie storage
+  - `/more` endpoint and `remaining_tries` cookie value
 - Impact:
-  - allows to find the server's guess by repeated requests and cookie forgery
+  - allows to find the server's guess by repeated requests and cookie poisoning
 
 ## Analyzing the server
 
@@ -26,7 +26,7 @@ total = lines[0].split(" ")[-1][:-1]
 current = lines[1].split(" ")[-1]
 ```
 If the values are different, send requests to `/more` until they are the same.
-To be able to send more requests, forge the `remaining_tries` value by modifying the cookie.
+To be able to send more requests, poison the `remaining_tries` value by modifying the cookie.
 Either set the value to `1` after each request or set a new cookie entry with the same `remaining_tries` name and no specific domain which wouldn't be updated and therefore wouldn't need to be set after every request.
 ```python
 r = session.get(URL+"more")

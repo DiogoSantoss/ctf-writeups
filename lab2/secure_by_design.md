@@ -1,9 +1,9 @@
 # Challenge `Secure by Design` Writeup
 
 - Vulnerability: 
-  - cookie forgery
+  - cookie poisoning
 - Where:
-  - cookie
+  - `user` cookie value
 - Impact:
   - allows privilege access to the admin account
 
@@ -18,7 +18,7 @@ Decoding this value reveals that it's the nickname entered by the user.
 
 A logical step is to try to enter with the admin nickname.
 However, the server prevents this by changing it to `fake-admin`. It's even possible to verify this by decoding the `user` key value and checking that it's the same whether the nickname is `admin` or `fake-admin`.
-To bypass this send a request with the cookie value forged equal to the base64 encoded value of `admin`.
+To bypass this send a request with the cookie value poisoned equal to the base64 encoded value of `admin`.
 ```python
 adminEncoded = base64.b64encode(b"admin").decode("utf-8")
 r = requests.get(URL, cookies={'user': adminEnded})
