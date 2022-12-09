@@ -1,9 +1,9 @@
-# Challenge `Guess a BIG Number` Writeup
+# Challenge `Another jackpot` Writeup
 
 - Vulnerability: 
   - Time-of-check Time-of-use / Race condition
 - Where:
-  - `/guess/number` endpoint
+  - `/login` and `/jackpot` endpoint
 - Impact:
   - allows non-admin user access to admin-only endpoint
 
