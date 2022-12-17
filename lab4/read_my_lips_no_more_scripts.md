@@ -1,4 +1,4 @@
-# Challenge `Go on and censor my posts` Writeup
+# Challenge `Read my lips: No more scripts!` Writeup
 
 - Vulnerability: 
   - XSS attack
@@ -11,12 +11,12 @@
 
 This challenges consists in grabbing the admins' cookies.
 By trying the exploits found in previous challenges this error pops up: `Either the 'unsafe-inline' keyword, a hash, or a nonce is required to enable inline execution`. 
-This means that a CSP policy is set to prevent any inline scripts but it also says that `Content Security Policy directive: "script-src *"` which indicates that its possible to 
-load scripts from any source.
+This means that a CSP policy is set to prevent any inline scripts but it also says that `Content Security Policy directive: "script-src *"` which indicates that its possible to load scripts from any source.
 
 ## Exploit
 
-Since we are able to load scripts, we can create a JavaScript file and host it somewhere so that it can later be loaded to perform the attack.
+Since we are able to load scripts, we can create a JavaScript file and host it somewhere so that it can later be loaded 
+to perform the attack.
 However, it couldn't really be hosted anywhere.
 The first try was to copy the last challenge payload to a pastebin link  (https://pastebin.com/)
 but this resulted in a `Cross-Origin Read Blocking (CORB)` warning meaning that the script had to be hosted in the same origin as the server running the website.
