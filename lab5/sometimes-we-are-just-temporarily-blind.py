@@ -47,8 +47,8 @@ def find_name(payload, names):
 
 
 # Find table name
-#find_name(payload, [])
+find_name(payload, [])
 # Find column name
-#find_name(column_payload, [])
+find_name(column_payload, [])
 # Find column content
 find_name(column_content_payload, [])
