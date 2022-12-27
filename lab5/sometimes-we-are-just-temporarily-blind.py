@@ -38,12 +38,10 @@ def find_name(payload, names):
             for letter in alph:
                 r = session.get(URL + payload(name + letter,len(name+letter)))
                 n = get_matches(r)
-                if n != "0" and not (name[-1] == '_' and letter == '_'):
+                if n != "0":
                     names.append(name + letter)
                     print("Found " + n + " with: " + name + letter)
-                else:
-                    if name in names:
-                        names.remove(name)
+            names.remove(name)
                   
         print(names)
 

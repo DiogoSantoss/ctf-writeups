@@ -3,4 +3,5 @@
 ## Labs index
 [Lab 2](lab2) - Brute-force attacks  
 [Lab 3](lab3) - Race conditions  
-[Lab 4](lab4) - XSS attacks  
+[Lab 4](lab4) - XSS attacks
+[Lab 5](lab5) - SQLi attacks
