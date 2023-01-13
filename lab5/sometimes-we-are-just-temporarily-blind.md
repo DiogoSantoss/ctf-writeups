@@ -1,4 +1,4 @@
-#Challenge `Sometimes we are just temporarily blind` Writeup
+# Challenge `Sometimes we are just temporarily blind` Writeup
 
 - Vulnerability:
   - SQLi attack

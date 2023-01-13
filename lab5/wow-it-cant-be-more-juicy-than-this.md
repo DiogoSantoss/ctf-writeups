@@ -1,4 +1,4 @@
-#Challenge `Wow, it can't be more juicy than this!` Writeup
+# Challenge `Wow, it can't be more juicy than this!` Writeup
 
 - Vulnerability: 
   - SQLi attack
