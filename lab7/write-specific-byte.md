@@ -22,7 +22,7 @@ and verifying that the 7th register is filled with `41` (the value of `A`) tell 
 Now we can write the address of the target variable to this register and then use the `%n` specifier to write anything there. 
 However this time we must write to the most significant byte of the target variable.
 Knowing that the target address points to the least significant byte, we can write the address of the target variable + 3 to the 7th register and then use the `%n` specifier to write any value.
-```
+```python
 p32(0x804a047) + "%7$n"
 ```
 Revealing the flag `SSof{And_write_very_big_numbers}`

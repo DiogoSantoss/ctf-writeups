@@ -23,7 +23,7 @@ and verifying that the 7th register is filled with `41` (the value of `A`) tell 
 To call the `win` function we need to overwrite the `eip` value with the address of the `win` function.
 However the address of the `eip` can change from machine to machine but the offset between the `buffer` and the `eip` is constant.
 So we can locally compute the offset between the `buffer` and the `eip` using `gdb` and then remotely use formatted string to find the address of the `buffer` variable and then compute the address of the `eip` using the offset.
-```
+```python
 # (to get the buffer address)
 payload = b'%08x' 
 # (to write in eip)

