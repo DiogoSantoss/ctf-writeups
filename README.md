@@ -1,5 +1,3 @@
-# ist195562
-
 ## Labs index
 [Lab 2](lab2) - Brute-force attacks  
 [Lab 3](lab3) - Race conditions  
